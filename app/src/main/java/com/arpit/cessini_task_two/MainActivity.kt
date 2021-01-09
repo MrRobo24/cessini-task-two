@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     lateinit var viewModel: ViewModel
+    val defaultUrl = "https://i.ytimg.com/vi/Zpvv9TdQU2k/maxresdefault.jpg"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,18 +22,30 @@ class MainActivity : AppCompatActivity() {
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.imgUrl.value = "https://i.ytimg.com/vi/Zpvv9TdQU2k/maxresdefault.jpg"
-
-        viewModel.etEmail.observe(this, Observer {
-            Log.d("TextWatcher", it)
-        })
+        viewModel.imgUrl.value = defaultUrl
+        viewModel.txtLoginButton.value = "Log In"
 
         viewModel.emailText.observe(this, Observer {
-            if (viewModel.isEmailValid(it.toString())) {
+            if (viewModel.isEmailValid(it?.toString())) {
                 Log.d("EmailText", it.toString())
-                viewModel.error.value = null
+                viewModel.emailError.value = null
             } else {
-                viewModel.error.value = "This email is not valid"
+                if (viewModel.imgUrl.value != defaultUrl) {
+                    viewModel.imgUrl.value = defaultUrl
+                }
+                viewModel.emailError.value = "This email is not valid"
+            }
+        })
+
+        viewModel.passwordText.observe(this, Observer {
+            if (viewModel.isPasswordValid(it?.toString())) {
+                Log.d("PasswordText", "Password Valid")
+                viewModel.passError.value = null
+            } else {
+                if (viewModel.imgUrl.value != defaultUrl) {
+                    viewModel.imgUrl.value = defaultUrl
+                }
+                viewModel.passError.value = "This password is not valid"
             }
         })
 

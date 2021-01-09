@@ -8,6 +8,7 @@
         <variable
             name="viewmodel"
             type="com.arpit.cessini_task_two.ViewModel" />
+
         <variable
             name="mcontext"
             type="com.arpit.cessini_task_two.MainActivity" />
@@ -16,54 +17,60 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="10dp"
         tools:context=".MainActivity">
 
         <ImageView
-            app:imageUrl="@{viewmodel.imgUrl}"
-            app:context="@{mcontext}"
+            android:scaleType="fitCenter"
             android:id="@+id/ivImage"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginTop="72dp"
+            app:context="@{mcontext}"
+            app:imageUrl="@{viewmodel.imgUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewmodel.txtData, default=`Default Email`}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:text="@={viewmodel.etEmail}"
-            app:layout_constraintBottom_toTopOf="@+id/btnLogin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtData"
-            app:layout_constraintVertical_bias="0.098" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:error="@{viewmodel.error}"
+            app:error="@{viewmodel.emailError}"
             app:layout_constraintBottom_toTopOf="@+id/btnLogin"
-            app:layout_constraintTop_toBottomOf="@+id/txtData">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
                 android:text="@={viewmodel.emailText}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:error="@{viewmodel.passError}"
+            app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+            app:layout_constraintTop_toBottomOf="@id/tilEmail"
+            app:layout_constraintVertical_bias="0.08"
+            tools:layout_editor_absoluteX="0dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Passsword"
+                android:inputType="textPassword"
+                android:text="@={viewmodel.passwordText}"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="575dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,6 +81,7 @@
             android:onClick="@{viewmodel::onClick}"
             android:text="@{viewmodel.txtLoginButton, default=`Default Button`}"
             app:layout_constraintBottom_toBottomOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
