@@ -2,7 +2,9 @@ package com.arpit.cessini_task_two
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arpit.cessini_task_two.databinding.ActivityMainBinding
 
@@ -17,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(ViewModel::class.java)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
+
+        viewModel.etEmail.observe(this, Observer {
+            Log.d("TextWatcher", it)
+        })
 
     }
 }
