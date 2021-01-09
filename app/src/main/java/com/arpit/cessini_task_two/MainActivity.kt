@@ -24,5 +24,14 @@ class MainActivity : AppCompatActivity() {
             Log.d("TextWatcher", it)
         })
 
+        viewModel.emailText.observe(this, Observer {
+            if (viewModel.isEmailValid(it.toString())) {
+                Log.d("EmailText", it.toString())
+                viewModel.error.value = null
+            } else {
+                viewModel.error.value = "This email is not valid"
+            }
+        })
+
     }
 }
