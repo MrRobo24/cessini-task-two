@@ -17,8 +17,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewModel = ViewModelProvider(this).get(ViewModel::class.java)
+        binding.mcontext = this
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
+
+        viewModel.imgUrl.value = "https://i.ytimg.com/vi/Zpvv9TdQU2k/maxresdefault.jpg"
 
         viewModel.etEmail.observe(this, Observer {
             Log.d("TextWatcher", it)

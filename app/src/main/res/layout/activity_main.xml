@@ -8,12 +8,27 @@
         <variable
             name="viewmodel"
             type="com.arpit.cessini_task_two.ViewModel" />
+        <variable
+            name="mcontext"
+            type="com.arpit.cessini_task_two.MainActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
+
+        <ImageView
+            app:imageUrl="@{viewmodel.imgUrl}"
+            app:context="@{mcontext}"
+            android:id="@+id/ivImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="72dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtData"

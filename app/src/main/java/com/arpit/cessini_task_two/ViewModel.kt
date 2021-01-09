@@ -12,6 +12,7 @@ class ViewModel : ViewModel() {
     var etEmail = MutableLiveData<String>()
     var error = MutableLiveData<String>()
     var emailText = MutableLiveData<String>()
+    var imgUrl = MutableLiveData<String>()
 
     fun onClick(view: View) {
         txtData.value = "Email Accepted"
