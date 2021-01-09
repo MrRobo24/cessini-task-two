@@ -16,21 +16,34 @@
         tools:context=".MainActivity">
 
         <TextView
-            android:id="@+id/txtEmail"
+            android:id="@+id/txtData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewmodel.txtEmail, default=`Default Email`}"
+            android:text="@{viewmodel.txtData, default=`Default Email`}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            app:textwatcher="@{viewmodel.emailTextWatcher}"
+            android:text="@{viewmodel.etEmail}"
+            app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtData"
+            app:layout_constraintVertical_bias="0.098" />
+
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewmodel.txtLoginButton, default=`Default Button`}"
             android:onClick="@{viewmodel::onClick}"
+            android:text="@{viewmodel.txtLoginButton, default=`Default Button`}"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
