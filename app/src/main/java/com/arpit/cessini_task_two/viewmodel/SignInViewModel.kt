@@ -5,7 +5,6 @@ import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.arpit.cessini_task_two.activity.SignUpActivity
@@ -13,12 +12,9 @@ import com.arpit.cessini_task_two.api.ApiInterface
 import com.arpit.cessini_task_two.api.RetrofitInstance
 import com.arpit.cessini_task_two.model.SignInBody
 import com.arpit.cessini_task_two.model.SignInResponseBody
-import com.arpit.cessini_task_two.model.SignUpResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 
 class SignInViewModel : ViewModel() {
