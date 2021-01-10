@@ -1,4 +1,4 @@
-package com.arpit.cessini_task_two
+package com.arpit.cessini_task_two.viewmodel
 
 import android.view.View
 import android.widget.Toast
@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class ViewModel : ViewModel() {
+open class ViewModel : ViewModel() {
 
     var txtLoginButton = MutableLiveData<String>()
     var emailError = MutableLiveData<String>()
@@ -45,18 +45,4 @@ class ViewModel : ViewModel() {
 
         return true
     }
-//    var emailTextWatcher: TextWatcher = object : TextWatcher {
-//        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//
-//        }
-//
-//        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//            Log.d("TextWatcher", s.toString())
-//        }
-//
-//        override fun afterTextChanged(s: Editable?) {
-//
-//        }
-//
-//    }
 }
