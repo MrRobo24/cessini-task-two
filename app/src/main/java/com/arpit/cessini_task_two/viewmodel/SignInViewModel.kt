@@ -1,17 +1,25 @@
 package com.arpit.cessini_task_two.viewmodel
 
+import android.content.Context
+import android.content.Intent
 import android.view.View
-import android.widget.Toast
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.arpit.cessini_task_two.activity.SignInActivity
+import com.arpit.cessini_task_two.activity.SignUpActivity
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-open class ViewModel : ViewModel() {
+
+class SignInViewModel : ViewModel() {
 
     var txtLoginButton = MutableLiveData<String>()
+
+
     var emailError = MutableLiveData<String>()
     var passError = MutableLiveData<String>()
+
     var emailText = MutableLiveData<String>()
     var passwordText = MutableLiveData<String>()
     var imgUrl = MutableLiveData<String>()
@@ -42,7 +50,15 @@ open class ViewModel : ViewModel() {
         ) {
             return false
         }
-
         return true
     }
+
+    fun goToSignUp(view: View) {
+        val context: Context = view.context
+        val intent = Intent(context, SignUpActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        context.startActivity(intent)
+    }
+
+
 }

@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.arpit.cessini_task_two.viewmodel.ViewModel" />
+            type="com.arpit.cessini_task_two.viewmodel.SignInViewModel" />
 
         <variable
             name="mcontext"

@@ -8,48 +8,48 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arpit.cessini_task_two.R
 import com.arpit.cessini_task_two.databinding.ActivitySignInBinding
-import com.arpit.cessini_task_two.viewmodel.ViewModel
+import com.arpit.cessini_task_two.viewmodel.SignInViewModel
 
 class SignInActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySignInBinding
-    lateinit var viewModel: ViewModel
+    lateinit var signInViewModel: SignInViewModel
     val defaultUrl = "https://i.ytimg.com/vi/Zpvv9TdQU2k/maxresdefault.jpg"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
-        viewModel = ViewModelProvider(this).get(ViewModel::class.java)
-        binding.mcontext = this
-        binding.viewmodel = viewModel
+        signInViewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
+        binding.scontext = this
+        binding.viewmodel = signInViewModel
         binding.lifecycleOwner = this
 
-        viewModel.imgUrl.value = defaultUrl
-        viewModel.txtLoginButton.value = "Log In"
+        signInViewModel.imgUrl.value = defaultUrl
+        signInViewModel.txtLoginButton.value = "Log In"
 
 
-        viewModel.emailText.observe(this, Observer {
-            if (viewModel.isEmailValid(it?.toString())) {
+        signInViewModel.emailText.observe(this, Observer {
+            if (signInViewModel.isEmailValid(it?.toString())) {
                 Log.d("EmailText", it.toString())
-                viewModel.emailError.value = null
+                signInViewModel.emailError.value = null
             } else {
-                if (viewModel.imgUrl.value != defaultUrl) {
-                    viewModel.imgUrl.value = defaultUrl
+                if (signInViewModel.imgUrl.value != defaultUrl) {
+                    signInViewModel.imgUrl.value = defaultUrl
                 }
-                viewModel.emailError.value = "This email is not valid"
+                signInViewModel.emailError.value = "This email is not valid"
             }
         })
 
-        viewModel.passwordText.observe(this, Observer {
-            if (viewModel.isPasswordValid(it?.toString())) {
+        signInViewModel.passwordText.observe(this, Observer {
+            if (signInViewModel.isPasswordValid(it?.toString())) {
                 Log.d("PasswordText", "Password Valid")
-                viewModel.passError.value = null
+                signInViewModel.passError.value = null
             } else {
-                if (viewModel.imgUrl.value != defaultUrl) {
-                    viewModel.imgUrl.value = defaultUrl
+                if (signInViewModel.imgUrl.value != defaultUrl) {
+                    signInViewModel.imgUrl.value = defaultUrl
                 }
-                viewModel.passError.value = "This password is not valid"
+                signInViewModel.passError.value = "This password is not valid"
             }
         })
     }
