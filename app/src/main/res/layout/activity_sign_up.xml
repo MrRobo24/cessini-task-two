@@ -17,15 +17,15 @@
         android:padding="10dp"
         tools:context=".activity.SignUpActivity">
 
-        <com.google.android.material.button.MaterialButton
+        <TextView
             android:id="@+id/btnSignInGo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:onClick="@{viewmodel::goToSignIn}"
-            android:text="Sign In"
-            app:cornerRadius="4dp"
+            android:text="@string/already_have_an_account_sign_in"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.996"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +43,7 @@
                 android:id="@+id/etRegEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:text="@={viewmodel.regEmailText}" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -62,8 +62,7 @@
                 android:id="@+id/etRegUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
-                android:inputType="textPassword"
+                android:hint="@string/username"
                 android:text="@={viewmodel.regUsernameText}" />
 
 
@@ -84,7 +83,7 @@
                 android:id="@+id/etRegPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:text="@={viewmodel.regPassText}" />
 

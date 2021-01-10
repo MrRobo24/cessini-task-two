@@ -2,12 +2,21 @@ package com.arpit.cessini_task_two.viewmodel
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.arpit.cessini_task_two.activity.SignInActivity
 import com.arpit.cessini_task_two.activity.SignUpActivity
+import com.arpit.cessini_task_two.api.ApiInterface
+import com.arpit.cessini_task_two.api.RetrofitInstance
+import com.arpit.cessini_task_two.model.SignInBody
+import com.arpit.cessini_task_two.model.SignInResponseBody
+import com.arpit.cessini_task_two.model.SignUpResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -17,31 +26,86 @@ class SignInViewModel : ViewModel() {
     var txtLoginButton = MutableLiveData<String>()
 
 
-    var emailError = MutableLiveData<String>()
+    var usernameError = MutableLiveData<String>()
     var passError = MutableLiveData<String>()
 
-    var emailText = MutableLiveData<String>()
+    var usernameText = MutableLiveData<String>()
     var passwordText = MutableLiveData<String>()
     var imgUrl = MutableLiveData<String>()
 
-    fun onClick(view: View) {
-        if (isEmailValid(emailText.value) && isPasswordValid(passwordText.value)) {
-            txtLoginButton.value = "Log In Successful"
-            imgUrl.value =
-                "https://www.kindpng.com/picc/m/3-30961_deal-with-it-android-cool-android-logo-png.png"
+    fun signIn(view: View) {
+
+
+        if (isUsernameValid(usernameText.value.toString()) && isPasswordValid(passwordText.value.toString())) {
+
+            if (isUsernameValid(usernameText.value.toString()) &&
+                isPasswordValid(passwordText.value.toString())
+            ) {
+
+                val retIn = RetrofitInstance.getRetrofitInstance().create(ApiInterface::class.java)
+                val signInInfo = SignInBody(
+                    usernameText.value.toString(),
+                    passwordText.value.toString()
+                )
+
+                val call: Call<SignInResponseBody> = retIn.signIn(signInInfo)
+                call.enqueue(object : Callback<SignInResponseBody> {
+                    override fun onFailure(call: Call<SignInResponseBody>, t: Throwable) {
+                        Toast.makeText(
+                            view.context,
+                            t.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        Log.d("SignIn", t.message.toString())
+                    }
+
+                    override fun onResponse(
+                        call: Call<SignInResponseBody>,
+                        response: Response<SignInResponseBody>
+                    ) {
+                        if (response.code() == 200) {
+
+                            txtLoginButton.value = "Log In Successful"
+                            imgUrl.value =
+                                "https://www.kindpng.com/picc/m/3-30961_deal-with-it-android-cool-android-logo-png.png"
+
+                            Toast.makeText(
+                                view.context,
+                                "Sign In success!",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+
+                            Log.d("SignIn", "Success")
+
+                        } else {
+                            Toast.makeText(
+                                view.context,
+                                "Sign In failed!",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                            Log.d("SignIn", "Failed")
+                        }
+                    }
+                })
+
+            }
+
+
         } else {
             txtLoginButton.value = "Log In Failed! Try Again"
         }
     }
 
-    fun isEmailValid(email: String?): Boolean {
-        if (email == null) {
+    fun isUsernameValid(username: String?): Boolean {
+        if (username == null ||
+            username.length < 6
+        ) {
             return false
         }
-        val expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
-        val pattern: Pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
-        val matcher: Matcher = pattern.matcher(email)
-        return matcher.matches()
+        return true
     }
 
     fun isPasswordValid(password: String?): Boolean {

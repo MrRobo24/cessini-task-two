@@ -29,15 +29,15 @@ class SignInActivity : AppCompatActivity() {
         signInViewModel.txtLoginButton.value = "Log In"
 
 
-        signInViewModel.emailText.observe(this, Observer {
-            if (signInViewModel.isEmailValid(it?.toString())) {
-                Log.d("EmailText", it.toString())
-                signInViewModel.emailError.value = null
+        signInViewModel.usernameText.observe(this, Observer {
+            if (signInViewModel.isUsernameValid(it?.toString())) {
+                Log.d("Username", it.toString())
+                signInViewModel.usernameError.value = null
             } else {
                 if (signInViewModel.imgUrl.value != defaultUrl) {
                     signInViewModel.imgUrl.value = defaultUrl
                 }
-                signInViewModel.emailError.value = "This email is not valid"
+                signInViewModel.usernameError.value = "This username is not valid"
             }
         })
 
