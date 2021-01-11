@@ -20,6 +20,7 @@ class SignUpActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
         viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
         binding.viewmodel = viewModel
+        binding.lifecycleOwner = this
         viewModel.txtSignUpButton.value = "Sign Up"
 
         viewModel.regEmailText.observe(this, Observer {
